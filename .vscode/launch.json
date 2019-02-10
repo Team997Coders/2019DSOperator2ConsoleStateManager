@@ -1,0 +1,15 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "2019DSOperator2ConsoleStateManager",
+      "preLaunchTask": "Get Natives",
+      "vmArgs": [
+        "-Djava.library.path=${workspaceFolder}/build/libs/natives"
+      ]
+    }
+  ]
+}

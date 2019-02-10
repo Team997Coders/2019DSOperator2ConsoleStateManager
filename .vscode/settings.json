@@ -1,0 +1,13 @@
+{
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.test.config": [
+    {
+      "name": "includeNativesConfiguration",
+      "workingDirectory": "${workspaceFolder}",
+      "args": [],
+      "vmargs": [],
+      "env": { "PATH":"build/libs/natives"}
+    }
+  ],
+  "java.test.defaultConfig": "includeNativesConfiguration"
+}
