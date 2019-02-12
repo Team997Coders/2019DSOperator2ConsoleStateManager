@@ -73,6 +73,26 @@ public class DeepspaceOperator2Console {
     visionAClickedCommand.start();
   }
 
+  public void clickVisionBButton() {
+    visionBClickedCommand.start();
+  }
+
+  public void clickVisionXButton() {
+    visionXClickedCommand.start();
+  }
+
+  public void clickVisionLeftButton() {
+    visionLeftClickedCommand.start();
+  }
+
+  public void clickVisionRightButton() {
+  visionRightClickedCommand.start();
+  }
+
+  public void clickVisionCenterButton() {
+    visionCenterClickedCommand.start();
+}
+
   public void clickPositionButton(PositionStates positionState) {
     this.positionState = positionState;
   }
@@ -85,10 +105,10 @@ public class DeepspaceOperator2Console {
   public void whenVisionAClicked(Command visionAClickedCommand) {
     this.visionAClickedCommand = visionAClickedCommand;
   }
-  public void whenVisionBClicked(Command visionAClickedCommand) {
+  public void whenVisionBClicked(Command visionBClickedCommand) {
     this.visionBClickedCommand = visionBClickedCommand;
   }
-  public void whenVisionXClicked(Command visionAClickedCommand) {
+  public void whenVisionXClicked(Command visionXClickedCommand) {
     this.visionXClickedCommand = visionXClickedCommand;
   }
   public void whenVisionLeftClicked(Command visionLeftClickedCommand) {
