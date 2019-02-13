@@ -38,6 +38,10 @@ public class DeepspaceOperator2Console {
     this.positionState = PositionStates.Low;
   }
 
+  public ScoringDestinationStates getScoringDestinationState() {
+    return scoringDestinationState;
+  }
+
   public ScoringDirectionStates getScoringDirectionState() {
     return scoringDirectionState;
   }

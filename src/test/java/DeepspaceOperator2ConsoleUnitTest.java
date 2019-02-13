@@ -119,4 +119,17 @@ public class DeepspaceOperator2ConsoleUnitTest {
     // Assert
     assertEquals(DeepspaceOperator2Console.PositionStates.None,console.getPositionState());
   }
+
+  @Test
+  public void itDeoesNotAllowBackHatchRocket() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+    console.clickScoringDirectionButton(DeepspaceOperator2Console.ScoringDirectionStates.Back);
+    console.clickScoringArtifactButton(DeepspaceOperator2Console.ScoringArtifactStates.Hatch);
+    console.clickScoringDestinationButton(DeepspaceOperator2Console.ScoringDestinationStates.CargoShip);
+    // Act
+    console.clickScoringDestinationButton(DeepspaceOperator2Console.ScoringDestinationStates.Rocket);
+    // Assert
+    assertEquals(DeepspaceOperator2Console.ScoringDestinationStates.CargoShip,console.getScoringDestinationState());
+  }
 }
