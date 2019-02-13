@@ -1,5 +1,4 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -22,6 +21,102 @@ public class DeepspaceOperator2ConsoleUnitTest {
   }
 
   @Test
+  public void itSetsScoringArtifactStateToHatchWhenClicked() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+
+    // Act
+    console.clickScoringArtifactHatchButton();
+
+    // Assert
+    assertEquals(DeepspaceOperator2Console.ScoringArtifactStates.Hatch, console.getScoringArtifactState());
+  }
+
+  @Test
+  public void itSetsScoringDestinationStateToRocketWhenClicked() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+
+    // Act
+    console.clickScoringDestinationRocketButton();
+
+    // Assert
+    assertEquals(DeepspaceOperator2Console.ScoringDestinationStates.Rocket, console.getScoringDestinationState());
+  }
+
+  @Test
+  public void itSetsScoringDestinationStateToCargoShipWhenClicked() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+
+    // Act
+    console.clickScoringDestinationCargoShipButton();
+
+    // Assert
+    assertEquals(DeepspaceOperator2Console.ScoringDestinationStates.CargoShip, console.getScoringDestinationState());
+  }
+
+  @Test
+  public void itSetsScoringDirectionStateToBackWhenClicked() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+
+    // Act
+    console.clickScoringDirectionBackButton();
+
+    // Assert
+    assertEquals(DeepspaceOperator2Console.ScoringDirectionStates.Back, console.getScoringDirectionState());
+  }
+
+  @Test
+  public void itSetsScoringDirectionStateToFrontWhenClicked() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+
+    // Act
+    console.clickScoringDirectionFrontButton();
+
+    // Assert
+    assertEquals(DeepspaceOperator2Console.ScoringDirectionStates.Front, console.getScoringDirectionState());
+  }
+
+  @Test
+  public void itSetsPositionToHighWhenClicked() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+
+    // Act
+    console.clickHighPositionButton();
+
+    // Assert
+    assertEquals(DeepspaceOperator2Console.PositionStates.High, console.getPositionState());
+  }
+
+  @Test
+  public void itSetsPositionToMeduimWhenClicked() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+
+    // Act
+    console.clickMediumPositionButton();
+
+    // Assert
+    assertEquals(DeepspaceOperator2Console.PositionStates.Medium, console.getPositionState());
+  }
+
+  @Test
+  public void itSetsPositionToLowWhenClicked() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+
+    // Act
+    console.clickLowPositionButton();
+
+    // Assert
+    assertEquals(DeepspaceOperator2Console.PositionStates.Low, console.getPositionState());
+  }
+
+  @Test
   public void itStartsActivatedCommandWhenActivateButtonClicked() {
     // Assemble
     DeepspaceOperator2Console console = new DeepspaceOperator2Console();
@@ -37,8 +132,14 @@ public class DeepspaceOperator2ConsoleUnitTest {
 
   @Test
   public void itSetsStateCorrectlyWhenInitialized() {
-    // TODO: Implement this.
-    assertTrue(true);
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+
+    // Assert
+    assertEquals(DeepspaceOperator2Console.ScoringDirectionStates.Back, console.getScoringDirectionState());
+    assertEquals(DeepspaceOperator2Console.ScoringDestinationStates.None, console.getScoringDestinationState());
+    assertEquals(DeepspaceOperator2Console.ScoringArtifactStates.None, console.getScoringArtifactState());
+    assertEquals(DeepspaceOperator2Console.PositionStates.None, console.getPositionState());
   }
   
   @Test
@@ -82,6 +183,7 @@ public class DeepspaceOperator2ConsoleUnitTest {
     // Assert
     verify(visionLeftClickedCommand, times(1)).start();
   }
+
   @Test
   public void itStartsRightCommandWhenRightButtonClicked() {
     // Assemble
@@ -95,6 +197,7 @@ public class DeepspaceOperator2ConsoleUnitTest {
     // Assert
     verify(visionRightClickedCommand, times(1)).start();
   }
+
   @Test
   public void itStartsCenterCommandWhenCenterButtonClicked() {
     // Assemble
@@ -108,6 +211,7 @@ public class DeepspaceOperator2ConsoleUnitTest {
     // Assert
     verify(visionCenterClickedCommand, times(1)).start();
   }
+
   @Test
   public void itClearsHeightWhenCargoShipButtonClicked() {
     // Assemble
@@ -134,5 +238,52 @@ public class DeepspaceOperator2ConsoleUnitTest {
 
     // Assert
     assertEquals(DeepspaceOperator2Console.ScoringDestinationStates.CargoShip, console.getScoringDestinationState());
+  }
+
+  @Test
+  public void itClearsRocketWhenHatchSetAndBackSelected() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+    console.clickScoringArtifactHatchButton();
+    console.clickScoringDestinationRocketButton();
+
+    // Act
+    console.clickScoringDirectionBackButton();
+
+    // Assert
+    assertEquals(DeepspaceOperator2Console.ScoringDestinationStates.None, console.getScoringDestinationState());
+  }
+
+  @Test
+  public void itClearsRocketWhenBackSetAndHatchSelected() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+    console.clickScoringDirectionBackButton();
+    console.clickScoringDestinationRocketButton();
+
+    // Act
+    console.clickScoringArtifactHatchButton();
+
+    // Assert
+    assertEquals(DeepspaceOperator2Console.ScoringDestinationStates.None, console.getScoringDestinationState());
+  }
+
+  @Test
+  public void itClearsStatesWhenCancelButtonClicked() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+    console.clickScoringDirectionFrontButton();
+    console.clickScoringArtifactHatchButton();
+    console.clickScoringDestinationRocketButton();
+    console.clickMediumPositionButton();
+
+    // Act
+    console.clickCancelButton();
+
+    // Assert
+    assertEquals(DeepspaceOperator2Console.ScoringDestinationStates.None, console.getScoringDestinationState());
+    assertEquals(DeepspaceOperator2Console.ScoringDirectionStates.None, console.getScoringDirectionState());
+    assertEquals(DeepspaceOperator2Console.ScoringArtifactStates.None, console.getScoringArtifactState());
+    assertEquals(DeepspaceOperator2Console.PositionStates.None, console.getPositionState());
   }
 }
