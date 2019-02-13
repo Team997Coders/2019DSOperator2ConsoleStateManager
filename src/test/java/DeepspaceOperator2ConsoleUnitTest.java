@@ -108,4 +108,15 @@ public class DeepspaceOperator2ConsoleUnitTest {
     // Assert
     verify(visionCenterClickedCommand, times(1)).start();
   }
+  @Test
+  public void itClearsHeightWenCargoShipButtonClicked() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+    console.clickHighPositionButton();
+    // Act
+    console.clickScoringDestinationButton(DeepspaceOperator2Console.ScoringDestinationStates.CargoShip);
+
+    // Assert
+    assertEquals(DeepspaceOperator2Console.PositionStates.None,console.getPositionState());
+  }
 }

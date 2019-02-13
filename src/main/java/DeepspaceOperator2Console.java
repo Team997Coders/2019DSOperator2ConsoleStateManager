@@ -26,6 +26,17 @@ public class DeepspaceOperator2Console {
   public DeepspaceOperator2Console() {
     setCancelState();
   }
+  public void clickHighPositionButton(){
+    this.positionState = PositionStates.High;
+  }
+
+  public void clickMediumPositionButton(){
+    this.positionState = PositionStates.Medium;
+  }
+
+  public void clickLowPositionButton(){
+    this.positionState = PositionStates.Low;
+  }
 
   public ScoringDirectionStates getScoringDirectionState() {
     return scoringDirectionState;
@@ -41,6 +52,19 @@ public class DeepspaceOperator2Console {
 
   public void clickScoringDirectionButton(ScoringDirectionStates scoringDirectionState) {
     this.scoringDirectionState = scoringDirectionState;
+  }
+
+  public void clickScoringDestinationButton(ScoringDestinationStates scoringDestinationState) {
+    if(scoringDestinationState == ScoringDestinationStates.Rocket &&
+      scoringDirectionState == ScoringDirectionStates.Back &&
+        scoringArtifactState == ScoringArtifactStates.Hatch){
+         }else{
+          this.scoringDestinationState = scoringDestinationState;
+         }
+  
+    if (this.scoringDestinationState == ScoringDestinationStates.CargoShip){
+      this.positionState = PositionStates.None;
+    }
   }
 
   public void clickScoringArtifactButton(ScoringArtifactStates scoringArtifactState) {
