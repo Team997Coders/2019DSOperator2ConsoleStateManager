@@ -15,7 +15,9 @@ public class ActivateCommand extends Command {
   public void start() {
     // Simply spew state to console
     System.out.println("Activated! State is:");
+    System.out.println(String.format("  Scoring direction: %s", console.getScoringDirectionState().toString()));
     System.out.println(String.format("  Scoring artifact: %s", console.getScoringArtifactState().toString()));
+    System.out.println(String.format("  Scoring destination: %s", console.getScoringDestinationState().toString()));
     System.out.println(String.format("  Scoring position: %s", console.getPositionState().toString()));
   }
 }

@@ -14,6 +14,7 @@ public class DeepspaceOperator2Console {
   private ScoringArtifactStates scoringArtifactState;
   private ScoringDestinationStates scoringDestinationState;
   private PositionStates positionState;
+  private boolean intakeState;
   private Command activateClickedCommand;
   private Command visionAClickedCommand;
   private Command visionBClickedCommand;
@@ -42,6 +43,13 @@ public class DeepspaceOperator2Console {
    */
   public void clickCancelButton() {
     setCancelState();
+  }
+
+  /**
+   * Click event handler for setting intake.
+   */
+  public void clickIntakeButton(){
+    this.intakeState = !intakeState;
   }
 
   /**
@@ -191,6 +199,10 @@ public class DeepspaceOperator2Console {
     return positionState;
   }
 
+  public boolean getIntakeState() {
+    return intakeState;
+  }
+
   /**
    * Set the cancel state. All settings are sent to none.
    */
@@ -199,6 +211,7 @@ public class DeepspaceOperator2Console {
     scoringArtifactState = ScoringArtifactStates.None;
     scoringDestinationState = ScoringDestinationStates.None;
     positionState = PositionStates.None;
+    intakeState = false;
   }
 
   /**
@@ -210,6 +223,7 @@ public class DeepspaceOperator2Console {
     scoringArtifactState = ScoringArtifactStates.None;
     scoringDestinationState = ScoringDestinationStates.None;
     positionState = PositionStates.None;
+    intakeState = false;
   }
 
   /**

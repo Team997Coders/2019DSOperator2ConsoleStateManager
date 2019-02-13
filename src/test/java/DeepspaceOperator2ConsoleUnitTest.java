@@ -117,6 +117,18 @@ public class DeepspaceOperator2ConsoleUnitTest {
   }
 
   @Test
+  public void itTogglesIntakeWhenClicked() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+
+    // Act
+    console.clickIntakeButton();
+
+    // Assert
+    assertEquals(true, console.getIntakeState());
+  }
+
+  @Test
   public void itStartsActivatedCommandWhenActivateButtonClicked() {
     // Assemble
     DeepspaceOperator2Console console = new DeepspaceOperator2Console();
@@ -140,6 +152,7 @@ public class DeepspaceOperator2ConsoleUnitTest {
     assertEquals(DeepspaceOperator2Console.ScoringDestinationStates.None, console.getScoringDestinationState());
     assertEquals(DeepspaceOperator2Console.ScoringArtifactStates.None, console.getScoringArtifactState());
     assertEquals(DeepspaceOperator2Console.PositionStates.None, console.getPositionState());
+    assertEquals(false, console.getIntakeState());
   }
   
   @Test
@@ -276,6 +289,7 @@ public class DeepspaceOperator2ConsoleUnitTest {
     console.clickScoringArtifactHatchButton();
     console.clickScoringDestinationRocketButton();
     console.clickMediumPositionButton();
+    console.clickIntakeButton();
 
     // Act
     console.clickCancelButton();
@@ -285,5 +299,6 @@ public class DeepspaceOperator2ConsoleUnitTest {
     assertEquals(DeepspaceOperator2Console.ScoringDirectionStates.None, console.getScoringDirectionState());
     assertEquals(DeepspaceOperator2Console.ScoringArtifactStates.None, console.getScoringArtifactState());
     assertEquals(DeepspaceOperator2Console.PositionStates.None, console.getPositionState());
+    assertEquals(false, console.getIntakeState());
   }
 }
