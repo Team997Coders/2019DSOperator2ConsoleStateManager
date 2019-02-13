@@ -44,6 +44,8 @@ public class Main {
     ActivateCommand activateCommand = new ActivateCommand(console);
     console.whenActivateClicked(activateCommand);
 
+    System.out.println("Connected to custom Deepspace gamepad controller.");
+
     while(true) {
       // Get current state of joystick and check if joystick is disconnected.
       if( !joystick.pollController() ) {
@@ -78,6 +80,7 @@ public class Main {
           console.clickActivateButton();
         } else if (joystick.getButtonValue(CANCEL_BUTTON)) {
           console.clickCancelButton();
+          System.out.println("Cancel pressed.");
         }
       } catch (IndexOutOfBoundsException e) {
         System.out.println("Expected buttons not found...continuing.");
