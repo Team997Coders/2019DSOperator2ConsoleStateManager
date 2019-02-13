@@ -54,23 +54,32 @@ public class DeepspaceOperator2Console {
 
   /**
    * Click event handler for setting high lift position.
+   * This will not set for the cargo ship.
    */
   public void clickHighPositionButton(){
-    this.positionState = PositionStates.High;
+    if (this.scoringDestinationState != ScoringDestinationStates.CargoShip) {
+      this.positionState = PositionStates.High;
+    }
   }
 
   /**
    * Click event handler for setting medium lift position.
+   * This will not set for the cargo ship.
    */
   public void clickMediumPositionButton(){
-    this.positionState = PositionStates.Medium;
+    if (this.scoringDestinationState != ScoringDestinationStates.CargoShip) {
+      this.positionState = PositionStates.Medium;
+    }
   }
 
   /**
    * Click event handler for setting low lift position.
+   * This will not set for the cargo ship.
    */
   public void clickLowPositionButton(){
-    this.positionState = PositionStates.Low;
+    if (this.scoringDestinationState != ScoringDestinationStates.CargoShip) {
+      this.positionState = PositionStates.Low;
+    }
   }
 
   /**

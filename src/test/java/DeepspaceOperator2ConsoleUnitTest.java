@@ -129,6 +129,45 @@ public class DeepspaceOperator2ConsoleUnitTest {
   }
 
   @Test
+  public void itWillNotSetHighHeightWhenDestinationCargoShip() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+    console.clickScoringDestinationCargoShipButton();
+
+    // Act
+    console.clickHighPositionButton();
+
+    // Assert
+    assertEquals(DeepspaceOperator2Console.PositionStates.None, console.getPositionState());
+  }
+
+  @Test
+  public void itWillNotSetMediumHeightWhenDestinationCargoShip() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+    console.clickScoringDestinationCargoShipButton();
+
+    // Act
+    console.clickMediumPositionButton();
+
+    // Assert
+    assertEquals(DeepspaceOperator2Console.PositionStates.None, console.getPositionState());
+  }
+
+  @Test
+  public void itWillNotSetLowHeightWhenDestinationCargoShip() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+    console.clickScoringDestinationCargoShipButton();
+
+    // Act
+    console.clickLowPositionButton();
+
+    // Assert
+    assertEquals(DeepspaceOperator2Console.PositionStates.None, console.getPositionState());
+  }
+
+  @Test
   public void itStartsActivatedCommandWhenActivateButtonClicked() {
     // Assemble
     DeepspaceOperator2Console console = new DeepspaceOperator2Console();
