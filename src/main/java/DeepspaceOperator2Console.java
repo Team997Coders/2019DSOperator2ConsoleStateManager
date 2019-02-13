@@ -3,7 +3,7 @@ import edu.wpi.first.wpilibj.command.*;
 /**
  * This class implements the Deepspace operator 2 custom console
  * for running on the roborio. Hook wpilibj joystick whenPressed
- * methods to the appropriate methods below. Wpilibj whenPressed
+ * methods to the appropriate click methods below. Wpilibj whenPressed
  * methods will get called in response to custom HID firmware running
  * on an embedded device, plugged in to the driver station, which
  * mimics a joystick. The driver station will do what it always does
@@ -15,7 +15,6 @@ public class DeepspaceOperator2Console {
   private ScoringDestinationStates scoringDestinationState;
   private PositionStates positionState;
   private Command activateClickedCommand;
-  private Command mediumPositionClickedCommand;
   private Command visionAClickedCommand;
   private Command visionBClickedCommand;
   private Command visionXClickedCommand;
@@ -23,19 +22,157 @@ public class DeepspaceOperator2Console {
   private Command visionRightClickedCommand;
   private Command visionCenterClickedCommand;
 
+  /**
+   * NOTE: You must wire up whenClicked event handlers independent of
+   * this constructor.
+   */
   public DeepspaceOperator2Console() {
     setStartupState();
   }
+
+  /**
+   * Click event handler for activating arm movement.
+   */
+  public void clickActivateButton() {
+    activateClickedCommand.start();
+  }
+
+  /**
+   * Click event handler for setting the cancel state.
+   */
+  public void clickCancelButton() {
+    setCancelState();
+  }
+
+  /**
+   * Click event handler for setting high lift position.
+   */
   public void clickHighPositionButton(){
     this.positionState = PositionStates.High;
   }
 
+  /**
+   * Click event handler for setting medium lift position.
+   */
   public void clickMediumPositionButton(){
     this.positionState = PositionStates.Medium;
   }
 
+  /**
+   * Click event handler for setting low lift position.
+   */
   public void clickLowPositionButton(){
     this.positionState = PositionStates.Low;
+  }
+
+  /**
+   * Click event handler for setting the scoring artifact to ball.
+   */
+  public void clickScoringArtifactBallButton() {
+    this.scoringArtifactState = ScoringArtifactStates.Ball;
+  }
+
+  /**
+   * Click event handler for setting the scoring artifact to hatch.
+   * Back/Hatch/Rocket is not allowed, so clear destination if 
+   * rocket is set.
+   */
+  public void clickScoringArtifactHatchButton() {
+    this.scoringArtifactState = ScoringArtifactStates.Hatch;
+    // If back is selected and destination is rocket, clear destination.
+    // This combination is not allowed.
+    if (scoringDirectionState == ScoringDirectionStates.Back &&
+        scoringDestinationState == ScoringDestinationStates.Rocket) {
+      scoringDestinationState = ScoringDestinationStates.None;
+    }
+  }
+
+  /**
+   * Click event handler for setting scoring direction to back.
+   * Back/Hatch/Rocket is not allowed, so clear destination if 
+   * rocket is set.
+   */
+  public void clickScoringDirectionBackButton() {
+    this.scoringDirectionState = ScoringDirectionStates.Back;
+    // If hatch is selected and destination is rocket, clear destination.
+    // This combination is not allowed.
+    if (scoringArtifactState == ScoringArtifactStates.Hatch && 
+        scoringDestinationState == ScoringDestinationStates.Rocket) {
+      scoringDestinationState = ScoringDestinationStates.None;
+    }
+  }
+
+  /**
+   * Click event handler for setting scoring direction to front.
+   */
+  public void clickScoringDirectionFrontButton() {
+    this.scoringDirectionState = ScoringDirectionStates.Front;
+  }
+
+  /**
+   * Click event handler for setting scoring destination to rocket.
+   * Back/Hatch/Rocket is not a valid combination, so rocket will
+   * not get set under that condition.
+   */
+  public void clickScoringDestinationRocketButton() {
+    if (scoringDirectionState == ScoringDirectionStates.Back &&
+        scoringArtifactState == ScoringArtifactStates.Hatch) {
+      // this is not allowed
+    } else {
+      this.scoringDestinationState = ScoringDestinationStates.Rocket;
+    }
+  }
+
+  /**
+   * Click event handler for setting the scoring destination to cargo ship.
+   * There are no height settings for the cargo ship so they get cleared.
+   */
+  public void clickScoringDestinationCargoShipButton() {
+    this.scoringDestinationState = ScoringDestinationStates.CargoShip;
+    // There are no height positions for the cargo ship.
+    this.positionState = PositionStates.None;
+  }
+
+  /**
+   * Click event handler for the vision A button.
+   */
+  public void clickVisionAButton() {
+    visionAClickedCommand.start();
+  }
+
+  /**
+   * Click event handler for the vision B button.
+   */
+  public void clickVisionBButton() {
+    visionBClickedCommand.start();
+  }
+
+  /**
+   * Click event handler for the vision X button.
+   */
+  public void clickVisionXButton() {
+    visionXClickedCommand.start();
+  }
+
+  /**
+   * Click event handler for the vision pan left button.
+   */
+  public void clickVisionLeftButton() {
+    visionLeftClickedCommand.start();
+  }
+
+  /**
+   * Click event handler for the vision pan right button.
+   */
+  public void clickVisionRightButton() {
+  visionRightClickedCommand.start();
+  }
+
+  /**
+   * Click event handler for the vision center button.
+   */
+  public void clickVisionCenterButton() {
+    visionCenterClickedCommand.start();
   }
 
   public ScoringDestinationStates getScoringDestinationState() {
@@ -54,31 +191,9 @@ public class DeepspaceOperator2Console {
     return positionState;
   }
 
-  public void clickScoringDirectionButton(ScoringDirectionStates scoringDirectionState) {
-    this.scoringDirectionState = scoringDirectionState;
-  }
-
-  public void clickScoringDestinationButton(ScoringDestinationStates scoringDestinationState) {
-    if(scoringDestinationState == ScoringDestinationStates.Rocket &&
-      scoringDirectionState == ScoringDirectionStates.Back &&
-        scoringArtifactState == ScoringArtifactStates.Hatch){
-         }else{
-          this.scoringDestinationState = scoringDestinationState;
-         }
-  
-    if (this.scoringDestinationState == ScoringDestinationStates.CargoShip){
-      this.positionState = PositionStates.None;
-    }
-  }
-
-  public void clickScoringArtifactButton(ScoringArtifactStates scoringArtifactState) {
-    this.scoringArtifactState = scoringArtifactState;
-  }
-
-  public void clickCancelButton() {
-    setCancelState();
-  }
-
+  /**
+   * Set the cancel state. All settings are sent to none.
+   */
   private void setCancelState() {
     scoringDirectionState = ScoringDirectionStates.None;
     scoringArtifactState = ScoringArtifactStates.None;
@@ -86,6 +201,10 @@ public class DeepspaceOperator2Console {
     positionState = PositionStates.None;
   }
 
+  /**
+   * Set the robot startup state. Robot will start in the
+   * back facing position, so set scoring direction to back.
+   */
   private void setStartupState() {
     scoringDirectionState = ScoringDirectionStates.Back;
     scoringArtifactState = ScoringArtifactStates.None;
@@ -93,85 +212,75 @@ public class DeepspaceOperator2Console {
     positionState = PositionStates.None;
   }
 
-  public void clickActivateButton() {
-    activateClickedCommand.start();
-  }
-
+  /**
+   * Set up the command that will be called when the arm
+   * is to be activated.
+   *  
+   * @param activateClickedCommand  The command to start.
+   */
   public void whenActivateClicked(Command activateClickedCommand) {
     this.activateClickedCommand = activateClickedCommand;
   }
 
-  public void clickVisionAButton() {
-    visionAClickedCommand.start();
-  }
-
-  public void clickVisionBButton() {
-    visionBClickedCommand.start();
-  }
-
-  public void clickVisionXButton() {
-    visionXClickedCommand.start();
-  }
-
-  public void clickVisionLeftButton() {
-    visionLeftClickedCommand.start();
-  }
-
-  public void clickVisionRightButton() {
-  visionRightClickedCommand.start();
-  }
-
-  public void clickVisionCenterButton() {
-    visionCenterClickedCommand.start();
-}
-
-  public void clickPositionButton(PositionStates positionState) {
-    this.positionState = positionState;
-  }
-
-  // I don't think we need any callback command handlers for any
-  // of the state buttons. We do need them for the vision buttons
-  // and for the active button (but not for the cancel button unless
-  // the robot goes into turtle mode or something).
-
+  /**
+   * Set up the command that will be called when the vision A
+   * button is pressed.
+   * 
+   * @param visionAClickedCommand The command to start.
+   */
   public void whenVisionAClicked(Command visionAClickedCommand) {
     this.visionAClickedCommand = visionAClickedCommand;
   }
+
+  /**
+   * Set up the command that will be called when the vision B
+   * button is pressed.
+   * 
+   * @param visionBClickedCommand The command to start.
+   */
   public void whenVisionBClicked(Command visionBClickedCommand) {
     this.visionBClickedCommand = visionBClickedCommand;
   }
+
+  /**
+   * Set up the command that will be called when the vision X
+   * button is pressed.
+   * 
+   * @param visionXClickedCommand The command to start.
+   */
   public void whenVisionXClicked(Command visionXClickedCommand) {
     this.visionXClickedCommand = visionXClickedCommand;
   }
+
+  /**
+   * Set up the command that will be called when the vision pan left
+   * button is pressed.
+   * 
+   * @param visionLeftClickedCommand The command to start.
+   */
   public void whenVisionLeftClicked(Command visionLeftClickedCommand) {
     this.visionLeftClickedCommand = visionLeftClickedCommand;
   }
+
+  /**
+   * Set up the command that will be called when the vision pan right
+   * button is pressed.
+   * 
+   * @param visionRightClickedCommand The command to start.
+   */
   public void whenVisionRightClicked(Command visionRightClickedCommand) {
     this.visionRightClickedCommand = visionRightClickedCommand;
   }
+
+  /**
+   * Set up the command that will be called when the vision center
+   * button is pressed.
+   * 
+   * @param visionCenterClickedCommand The command to start.
+   */
   public void whenVisionCenterClicked(Command visionCenterClickedCommand) {
     this.visionCenterClickedCommand = visionCenterClickedCommand;
   }
-
-
-// Perhaps not needed?
-/*
-  public enum Buttons {
-    ScoringDirection, 
-    ScoringArtifact, 
-    ScoringDestination, 
-    HighPosition, 
-    MediumPosition, 
-    LowPosition, 
-    VisionA, 
-    VisionB, 
-    VisionX, 
-    VisionPanLeft, 
-    VisionCenter, 
-    VisionPanRight,
-    Intake
-  }
-*/
 
   public enum ScoringDirectionStates {
     None,

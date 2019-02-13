@@ -41,11 +41,11 @@ public class Main {
       // Read gamepad button states and forward states to custom console.
       try {
         if (joystick.getButtonValue(SCORING_ARTIFACT_HATCH_BUTTON)) {
-          console.clickScoringArtifactButton(DeepspaceOperator2Console.ScoringArtifactStates.Hatch);
+          console.clickScoringArtifactHatchButton();
         } else if (joystick.getButtonValue(SCORING_ARTIFACT_BALL_BUTTON)) {
-          console.clickScoringArtifactButton(DeepspaceOperator2Console.ScoringArtifactStates.Ball);
+          console.clickScoringArtifactBallButton();
         } else if (joystick.getButtonValue(MEDIUM_POSITION_BUTTON)) {
-          console.clickPositionButton(DeepspaceOperator2Console.PositionStates.Medium);
+          console.clickMediumPositionButton();
         } else if (joystick.getButtonValue(ACTIVATE_BUTTON)) {
           console.clickActivateButton();
         }

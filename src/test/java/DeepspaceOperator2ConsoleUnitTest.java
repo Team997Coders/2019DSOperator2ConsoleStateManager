@@ -15,7 +15,7 @@ public class DeepspaceOperator2ConsoleUnitTest {
     DeepspaceOperator2Console console = new DeepspaceOperator2Console();
 
     // Act
-    console.clickScoringArtifactButton(DeepspaceOperator2Console.ScoringArtifactStates.Ball);
+    console.clickScoringArtifactBallButton();
 
     // Assert
     assertEquals(DeepspaceOperator2Console.ScoringArtifactStates.Ball, console.getScoringArtifactState());
@@ -109,27 +109,30 @@ public class DeepspaceOperator2ConsoleUnitTest {
     verify(visionCenterClickedCommand, times(1)).start();
   }
   @Test
-  public void itClearsHeightWenCargoShipButtonClicked() {
+  public void itClearsHeightWhenCargoShipButtonClicked() {
     // Assemble
     DeepspaceOperator2Console console = new DeepspaceOperator2Console();
     console.clickHighPositionButton();
+
     // Act
-    console.clickScoringDestinationButton(DeepspaceOperator2Console.ScoringDestinationStates.CargoShip);
+    console.clickScoringDestinationCargoShipButton();
 
     // Assert
-    assertEquals(DeepspaceOperator2Console.PositionStates.None,console.getPositionState());
+    assertEquals(DeepspaceOperator2Console.PositionStates.None, console.getPositionState());
   }
 
   @Test
-  public void itDeoesNotAllowBackHatchRocket() {
+  public void itDoesNotAllowBackHatchRocket() {
     // Assemble
     DeepspaceOperator2Console console = new DeepspaceOperator2Console();
-    console.clickScoringDirectionButton(DeepspaceOperator2Console.ScoringDirectionStates.Back);
-    console.clickScoringArtifactButton(DeepspaceOperator2Console.ScoringArtifactStates.Hatch);
-    console.clickScoringDestinationButton(DeepspaceOperator2Console.ScoringDestinationStates.CargoShip);
+    console.clickScoringDirectionBackButton();
+    console.clickScoringArtifactHatchButton();
+    console.clickScoringDestinationCargoShipButton();
+
     // Act
-    console.clickScoringDestinationButton(DeepspaceOperator2Console.ScoringDestinationStates.Rocket);
+    console.clickScoringDestinationRocketButton();
+
     // Assert
-    assertEquals(DeepspaceOperator2Console.ScoringDestinationStates.CargoShip,console.getScoringDestinationState());
+    assertEquals(DeepspaceOperator2Console.ScoringDestinationStates.CargoShip, console.getScoringDestinationState());
   }
 }
