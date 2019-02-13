@@ -15,8 +15,13 @@ public class DeepspaceOperator2Console {
   private ScoringDestinationStates scoringDestinationState;
   private PositionStates positionState;
   private Command activateClickedCommand;
-  private Command visionAClickedCommand;
   private Command mediumPositionClickedCommand;
+  private Command visionAClickedCommand;
+  private Command visionBClickedCommand;
+  private Command visionXClickedCommand;
+  private Command visionLeftClickedCommand;
+  private Command visionRightClickedCommand;
+  private Command visionCenterClickedCommand;
 
   public DeepspaceOperator2Console() {
     setCancelState();
@@ -68,6 +73,26 @@ public class DeepspaceOperator2Console {
     visionAClickedCommand.start();
   }
 
+  public void clickVisionBButton() {
+    visionBClickedCommand.start();
+  }
+
+  public void clickVisionXButton() {
+    visionXClickedCommand.start();
+  }
+
+  public void clickVisionLeftButton() {
+    visionLeftClickedCommand.start();
+  }
+
+  public void clickVisionRightButton() {
+  visionRightClickedCommand.start();
+  }
+
+  public void clickVisionCenterButton() {
+    visionCenterClickedCommand.start();
+}
+
   public void clickPositionButton(PositionStates positionState) {
     this.positionState = positionState;
   }
@@ -80,6 +105,22 @@ public class DeepspaceOperator2Console {
   public void whenVisionAClicked(Command visionAClickedCommand) {
     this.visionAClickedCommand = visionAClickedCommand;
   }
+  public void whenVisionBClicked(Command visionBClickedCommand) {
+    this.visionBClickedCommand = visionBClickedCommand;
+  }
+  public void whenVisionXClicked(Command visionXClickedCommand) {
+    this.visionXClickedCommand = visionXClickedCommand;
+  }
+  public void whenVisionLeftClicked(Command visionLeftClickedCommand) {
+    this.visionLeftClickedCommand = visionLeftClickedCommand;
+  }
+  public void whenVisionRightClicked(Command visionRightClickedCommand) {
+    this.visionRightClickedCommand = visionRightClickedCommand;
+  }
+  public void whenVisionCenterClicked(Command visionCenterClickedCommand) {
+    this.visionCenterClickedCommand = visionCenterClickedCommand;
+  }
+
 
 // Perhaps not needed?
 /*

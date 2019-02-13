@@ -40,4 +40,72 @@ public class DeepspaceOperator2ConsoleUnitTest {
     // TODO: Implement this.
     assertTrue(true);
   }
+  
+  @Test
+  public void itStartsBCommandWhenBButtonClicked() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+    Command visionBClickedCommand = mock(Command.class);
+    console.whenVisionBClicked(visionBClickedCommand);
+
+    // Act
+    console.clickVisionBButton();
+
+    // Assert
+    verify(visionBClickedCommand, times(1)).start();
+  }
+
+  @Test
+  public void itStartsXCommandWhenXButtonClicked() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+    Command visionXClickedCommand = mock(Command.class);
+    console.whenVisionXClicked(visionXClickedCommand);
+
+    // Act
+    console.clickVisionXButton();
+
+    // Assert
+    verify(visionXClickedCommand, times(1)).start();
+  }
+
+  @Test
+  public void itStartsLeftCommandWhenLeftButtonClicked() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+    Command visionLeftClickedCommand = mock(Command.class);
+    console.whenVisionLeftClicked(visionLeftClickedCommand);
+
+    // Act
+    console.clickVisionLeftButton();
+
+    // Assert
+    verify(visionLeftClickedCommand, times(1)).start();
+  }
+  @Test
+  public void itStartsRightCommandWhenRightButtonClicked() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+    Command visionRightClickedCommand = mock(Command.class);
+    console.whenVisionRightClicked(visionRightClickedCommand);
+
+    // Act
+    console.clickVisionRightButton();
+
+    // Assert
+    verify(visionRightClickedCommand, times(1)).start();
+  }
+  @Test
+  public void itStartsCenterCommandWhenCenterButtonClicked() {
+    // Assemble
+    DeepspaceOperator2Console console = new DeepspaceOperator2Console();
+    Command visionCenterClickedCommand = mock(Command.class);
+    console.whenVisionCenterClicked(visionCenterClickedCommand);
+
+    // Act
+    console.clickVisionCenterButton();
+
+    // Assert
+    verify(visionCenterClickedCommand, times(1)).start();
+  }
 }

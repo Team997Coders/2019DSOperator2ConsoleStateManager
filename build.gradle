@@ -38,6 +38,14 @@ task extractNativeBundle(type: Sync) {
 
 assembleDist.dependsOn extractNativeBundle
 
+test {  
+  // log the following test events to the console...otherwise, everything is written to a report
+  testLogging {
+    events "PASSED", "STARTED", "FAILED", "SKIPPED"
+    showStandardStreams = true
+  }
+}
+
 run {
   dependsOn extractNativeBundle
   systemProperty "java.library.path", project.nativeLibsDir
