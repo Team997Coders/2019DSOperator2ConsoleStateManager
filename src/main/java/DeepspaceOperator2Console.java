@@ -24,7 +24,7 @@ public class DeepspaceOperator2Console {
   private Command visionCenterClickedCommand;
 
   public DeepspaceOperator2Console() {
-    setCancelState();
+    setStartupState();
   }
   public void clickHighPositionButton(){
     this.positionState = PositionStates.High;
@@ -80,10 +80,14 @@ public class DeepspaceOperator2Console {
   }
 
   private void setCancelState() {
-    // TODO: This default state MUST match the default state of the firmware
-    // when it is turned on. This state and the firmware state are
-    // NOT in communication with each other.
-    scoringDirectionState = ScoringDirectionStates.Front;
+    scoringDirectionState = ScoringDirectionStates.None;
+    scoringArtifactState = ScoringArtifactStates.None;
+    scoringDestinationState = ScoringDestinationStates.None;
+    positionState = PositionStates.None;
+  }
+
+  private void setStartupState() {
+    scoringDirectionState = ScoringDirectionStates.Back;
     scoringArtifactState = ScoringArtifactStates.None;
     scoringDestinationState = ScoringDestinationStates.None;
     positionState = PositionStates.None;
@@ -170,6 +174,7 @@ public class DeepspaceOperator2Console {
 */
 
   public enum ScoringDirectionStates {
+    None,
     Front,
     Back
   }
