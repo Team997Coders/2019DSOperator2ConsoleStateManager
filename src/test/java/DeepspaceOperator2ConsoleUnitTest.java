@@ -293,7 +293,7 @@ public class DeepspaceOperator2ConsoleUnitTest {
   }
 
   @Test
-  public void itClearsRocketWhenHatchSetAndBackSelected() {
+  public void itFlipsRocketToCargoShipWhenHatchSetAndBackSelected() {
     // Assemble
     DeepspaceOperator2Console console = new DeepspaceOperator2Console();
     console.clickScoringArtifactHatchButton();
@@ -303,11 +303,11 @@ public class DeepspaceOperator2ConsoleUnitTest {
     console.clickScoringDirectionBackButton();
 
     // Assert
-    assertEquals(DeepspaceOperator2Console.ScoringDestinationStates.None, console.getScoringDestinationState());
+    assertEquals(DeepspaceOperator2Console.ScoringDestinationStates.CargoShip, console.getScoringDestinationState());
   }
 
   @Test
-  public void itClearsRocketWhenBackSetAndHatchSelected() {
+  public void itFlipsRocketToCargoShipWhenBackSetAndHatchSelected() {
     // Assemble
     DeepspaceOperator2Console console = new DeepspaceOperator2Console();
     console.clickScoringDirectionBackButton();
@@ -317,7 +317,7 @@ public class DeepspaceOperator2ConsoleUnitTest {
     console.clickScoringArtifactHatchButton();
 
     // Assert
-    assertEquals(DeepspaceOperator2Console.ScoringDestinationStates.None, console.getScoringDestinationState());
+    assertEquals(DeepspaceOperator2Console.ScoringDestinationStates.CargoShip, console.getScoringDestinationState());
   }
 
   @Test

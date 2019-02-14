@@ -91,23 +91,22 @@ public class DeepspaceOperator2Console {
 
   /**
    * Click event handler for setting the scoring artifact to hatch.
-   * Back/Hatch/Rocket is not allowed, so clear destination if 
-   * rocket is set.
+   * Back/Hatch/Rocket is not allowed, so set cargoship as destination
+   * if this combination is found.
    */
   public void clickScoringArtifactHatchButton() {
     this.scoringArtifactState = ScoringArtifactStates.Hatch;
-    // If back is selected and destination is rocket, clear destination.
-    // This combination is not allowed.
+    // If back is selected and destination is rocket, set cargoship destination.
     if (scoringDirectionState == ScoringDirectionStates.Back &&
         scoringDestinationState == ScoringDestinationStates.Rocket) {
-      scoringDestinationState = ScoringDestinationStates.None;
+      clickScoringDestinationCargoShipButton();
     }
   }
 
   /**
    * Click event handler for setting scoring direction to back.
-   * Back/Hatch/Rocket is not allowed, so clear destination if 
-   * rocket is set.
+   * Back/Hatch/Rocket is not allowed, so set cargoship destination 
+   * if this combination found.
    */
   public void clickScoringDirectionBackButton() {
     this.scoringDirectionState = ScoringDirectionStates.Back;
@@ -115,7 +114,7 @@ public class DeepspaceOperator2Console {
     // This combination is not allowed.
     if (scoringArtifactState == ScoringArtifactStates.Hatch && 
         scoringDestinationState == ScoringDestinationStates.Rocket) {
-      scoringDestinationState = ScoringDestinationStates.None;
+      clickScoringDestinationCargoShipButton();
     }
   }
 
@@ -128,13 +127,13 @@ public class DeepspaceOperator2Console {
 
   /**
    * Click event handler for setting scoring destination to rocket.
-   * Back/Hatch/Rocket is not a valid combination, so rocket will
-   * not get set under that condition.
+   * Back/Hatch/Rocket is not a valid combination, so cargoship will
+   * get set under that condition.
    */
   public void clickScoringDestinationRocketButton() {
     if (scoringDirectionState == ScoringDirectionStates.Back &&
         scoringArtifactState == ScoringArtifactStates.Hatch) {
-      // this is not allowed
+      clickScoringDestinationCargoShipButton();
     } else {
       this.scoringDestinationState = ScoringDestinationStates.Rocket;
     }
